@@ -1,6 +1,6 @@
 ---
 #
-#    CentOS 7 (centos7) Base System (docker-compose.override.sample.yml)
+#    CentOS 7 (centos7) Rsyslog Log Server (docker-compose.override.sample.yml)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -27,10 +27,7 @@ version: '2'
 #
 services:
 
-  base:
+  rsyslog:
     build:
       args:
-        app_dropbear_listen_port: "10022"
-    ports:
-      - "10022"
 

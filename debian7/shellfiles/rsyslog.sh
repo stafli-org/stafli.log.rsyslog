@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    Debian 7 (wheezy) Base System (shellscript)
+#    Debian 7 (wheezy) Rsyslog Log Server (shellscript)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -28,14 +28,14 @@ alias RUN='';
 shopt -s expand_aliases;
 
 # Load dockerfile
-source "$(dirname $(readlink -f $0))/../dockerfiles/base.dockerfile";
+source "$(dirname $(readlink -f $0))/../dockerfiles/rsyslog.dockerfile";
 
 #
 # Cleanup
 #
 
 # Remove dupplicated services
-apt-get remove --purge -y dropbear supervisor;
+apt-get remove --purge -y rsyslog logrotate;
 
 #
 # Configuration
@@ -43,11 +43,7 @@ apt-get remove --purge -y dropbear supervisor;
 
 # Enable daemon
 update-rc.d rsyslog enable;
-update-rc.d cron enable;
-update-rc.d sshd enable;
 
 # Start daemon
 service rsyslog restart;
-service cron restart;
-service sshd restart;
 

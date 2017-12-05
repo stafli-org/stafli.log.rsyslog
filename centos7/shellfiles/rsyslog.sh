@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    Debian 8 (jessie) Base System (shellscript)
+#    CentOS 7 (centos7) Rsyslog Log Server (shellscript)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -28,14 +28,14 @@ alias RUN='';
 shopt -s expand_aliases;
 
 # Load dockerfile
-source "$(dirname $(readlink -f $0))/../dockerfiles/base.dockerfile";
+source "$(dirname $(readlink -f $0))/../dockerfiles/rsyslog.dockerfile";
 
 #
 # Cleanup
 #
 
 # Remove dupplicated services
-apt-get remove --purge -y dropbear supervisor;
+yum remove -y rsyslog logrotate;
 
 #
 # Configuration
@@ -43,11 +43,7 @@ apt-get remove --purge -y dropbear supervisor;
 
 # Enable daemon
 systemctl enable rsyslog.service;
-systemctl enable cron.service;
-systemctl enable ssh.service;
 
 # Start daemon
 systemctl restart rsyslog.service;
-systemctl restart cron.service;
-systemctl restart ssh.service;
 
