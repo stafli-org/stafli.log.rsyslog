@@ -1,51 +1,51 @@
-# Stafli Base System
-Stafli Base System builds are based on [Debian](https://www.debian.org/) and [CentOS](https://www.centos.org/), and developed as scripts for [Docker](https://www.docker.com/).  
-Continues on [Stafli Minimal System](https://github.com/stafli-org/stafli.minimal.system) builds.  
-This project is part of the [Stafli Application Stack](https://github.com/stafli-org/).
+# Stafli Rsyslog Log Server
+Stafli Rsyslog Log Server builds based on [Debian](https://www.debian.org) and [CentOS](https://www.centos.org), and developed as scripts for [Docker](https://www.docker.com).  
+Continues on [Stafli Base System](https://github.com/stafli-org/stafli.base.system) builds.  
+This project is part of the [Stafli Application Stack](https://github.com/stafli-org).
 
-Requires [Docker Compose](https://docs.docker.com/compose/) 1.6.x or higher due to the [version 2](https://docs.docker.com/compose/compose-file/#versioning) format of the docker-compose.yml files.
+Requires [Docker Compose](https://docs.docker.com/compose) 1.6.x or higher due to the [version 2](https://docs.docker.com/compose/compose-file/#versioning) format of the docker-compose.yml files.
 
 There are docker-compose.yml files per distribution, as well as docker-compose.override.yml and .env files, which may be used to override configuration.
 An optional [Makefile](../../tree/master/Makefile) is provided to help with loading these with ease and perform commands in batch.
 
 Scripts are also provided for each distribution to help test and deploy the installation procedures in non-Docker environments.
 
-The images are automatically built at a [repository](https://hub.docker.com/r/stafli/stafli.base.system) in the Docker Hub registry.
+The images are automatically built at a [repository](https://hub.docker.com/r/stafli/stafli.rsyslog.log) in the Docker Hub registry.
 
 ## Distributions
-The services use custom images as a starting point:
-- __Debian__, from the [Stafli Minimal System](https://github.com/stafli-org/stafli.minimal.system)
+The services use custom images as a starting point for the following distributions:
+- __Debian__, from the [official repository](https://hub.docker.com/_/debian)
   - [Debian 8 (jessie)](../../tree/master/debian8)
   - [Debian 7 (wheezy)](../../tree/master/debian7)
-- __CentOS__, from the [Stafli Minimal System](https://github.com/stafli-org/stafli.minimal.system)
+- __CentOS__, from the [official repository](https://hub.docker.com/_/centos)
   - [CentOS 7 (centos7)](../../tree/master/centos7)
   - [CentOS 6 (centos6)](../../tree/master/centos6)
 
 ## Services
 These are the services described by the dockerfile and docker-compose files:
-- Base, built on Stafli Minimal System and additional daemon packages
+- Rsyslog, built on [Stafli Base System](https://github.com/stafli-org/stafli.base.system) and additional [Rsyslog](http://www.rsyslog.com) packages
 
 ## Images
-These are the [resulting images](https://hub.docker.com/r/stafli/stafli.base.system/tags/) upon building:
-- Base:
-  - stafli/stafli.base.system:debian8_base
-  - stafli/stafli.base.system:debian7_base
-  - stafli/stafli.base.system:centos7_base
-  - stafli/stafli.base.system:centos6_base
+These are the [resulting images](https://hub.docker.com/r/stafli/stafli.rsyslog.log/tags) upon building:
+- Rsyslog:
+  - stafli/stafli.rsyslog.log:debian8_rsyslog
+  - stafli/stafli.rsyslog.log:debian7_rsyslog
+  - stafli/stafli.rsyslog.log:centos7_rsyslog
+  - stafli/stafli.rsyslog.log:centos6_rsyslog
 
 ## Containers
 These containers can be created from the images:
-- Base:
-  - debian8_base_xxx
-  - debian7_base_xxx
-  - centos7_base_xxx
-  - centos6_base_xxx
+- Rsyslog:
+  - debian8_rsyslog_xxx
+  - debian7_rsyslog_xxx
+  - centos7_rsyslog_xxx
+  - centos6_rsyslog_xxx
 
 ## Usage
 
 ### From Docker Hub repository (manual)
 
-Note: this method will not allow you to use the docker-compose files nor the script.
+Note: this method will not allow you to use the docker-compose files nor the Makefile.
 
 1. To pull the images, try typing:  
 `docker pull <image_url>`
@@ -56,19 +56,19 @@ Where <image_url> is the full image url (lookup the image list above).
 
 Example:
 ```
-docker pull stafli/stafli.base.system:debian8_base
+docker pull stafli/stafli.rsyslog.log:debian8_rsyslog
 
-docker run -ti stafli/stafli.base.system:debian8_base /bin/bash
+docker run -ti stafli/stafli.rsyslog.log:debian8_rsyslog /bin/bash
 ```
 
 ### From GitHub repository (automated)
 
 Note: this method allows using docker-compose and the Makefile.
 
-1. Download the repository [zip file](https://github.com/stafli-org/stafli.base.system/archive/master.zip) and unpack it or clone the repository using:  
-`git clone https://github.com/stafli-org/stafli.base.system.git`
+1. Download the repository [zip file](https://github.com/stafli-org/stafli.rsyslog.log/archive/master.zip) and unpack it or clone the repository using:  
+`git clone https://github.com/stafli-org/stafli.rsyslog.log.git`
 2. Navigate to the project directory through the terminal:  
-`cd stafli.base.system`
+`cd stafli.rsyslog.log`
 3. Type in the desired operation through the terminal:  
 `make <operation> DISTRO=<distro>`
 
@@ -76,8 +76,8 @@ Where <distro> is the distribution/directory and <operation> is the desired dock
 
 Example:
 ```
-git clone https://github.com/stafli-org/stafli.base.system.git;
-cd stafli.base.system;
+git clone https://github.com/stafli-org/stafli.rsyslog.log.git;
+cd stafli.rsyslog.log;
 
 # Example #1: quick start, with build
 make up DISTRO=debian8;
@@ -96,10 +96,10 @@ make con-ls DISTRO=debian8;
 Type `make` in the terminal to discover all the possible commands.
 
 ## Credits
-Stafli Base System  
+Stafli Rsyslog Log Server  
 Copyright (C) 2016-2017 Stafli  
 Luís Pedro Algarvio  
-This project is part of the Stafli Application Stack.
+This file is part of the Stafli Application Stack.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
