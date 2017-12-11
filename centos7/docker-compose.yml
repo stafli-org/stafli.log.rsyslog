@@ -27,7 +27,7 @@ version: '2'
 #
 services:
 
-  rsyslog:
+  centos7_rsyslog_log:
     labels:
       - "org.label-schema.schema-version=1.0"
       - "org.label-schema.name=$PROJECT_NAME"
@@ -54,7 +54,7 @@ services:
       - "org.label-schema.os-architecture=$BUILD_ARCH"
       - "org.label-schema.version=$BUILD_VERSION"
       - "org.label-schema.build-date=$BUILD_DATE"
-    image: "stafli/stafli.rsyslog.log:centos7_rsyslog"
+    image: "${IMAGE_URL_PREFIX}:centos7_rsyslog"
     build:
       context: "./dockerfiles"
       dockerfile: "rsyslog.dockerfile"

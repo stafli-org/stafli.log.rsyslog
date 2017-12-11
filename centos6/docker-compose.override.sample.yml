@@ -27,7 +27,7 @@ version: '2'
 #
 services:
 
-  rsyslog:
+  centos6_rsyslog_log:
     build:
       args:
 

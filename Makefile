@@ -426,19 +426,19 @@ con-inspect:
 	@echo
         ifeq ($(DISTRO), all)
 		@echo Inspecting containers for debian8...
-		docker container inspect debian8_rsyslog_1;
+		docker container inspect stafli_debian8_rsyslog_log_1;
 		@echo
 		@echo Inspecting containers for debian7...
-		docker container inspect debian7_rsyslog_1;
+		docker container inspect stafli_debian7_rsyslog_log_1;
 		@echo
 		@echo Inspecting containers for centos7...
-		docker container inspect centos7_rsyslog_1;
+		docker container inspect stafli_centos7_rsyslog_log_1;
 		@echo
 		@echo Inspecting containers for centos6...
-		docker container inspect centos6_rsyslog_1;
+		docker container inspect stafli_centos6_rsyslog_log_1;
         else
 		@echo Inspecting containers for $(DISTRO)...
-		docker container inspect $(DISTRO)_rsyslog_1;
+		docker container inspect stafli_$(DISTRO)_rsyslog_log_1;
         endif
 
 con-ips:
@@ -447,19 +447,19 @@ con-ips:
 	@echo
         ifeq ($(DISTRO), all)
 		@echo Showing IP addresses of containers for debian8...
-		docker container inspect debian8_rsyslog_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
+		docker container inspect stafli_debian8_rsyslog_log_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
 		@echo
 		@echo Showing IP addresses of containers for debian7...
-		docker container inspect debian7_rsyslog_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
+		docker container inspect stafli_debian7_rsyslog_log_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
 		@echo
 		@echo Showing IP addresses of containers for centos7...
-		docker container inspect centos7_rsyslog_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
+		docker container inspect stafli_centos7_rsyslog_log_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
 		@echo
 		@echo Showing IP addresses of containers for centos6...
-		docker container inspect centos6_rsyslog_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
+		docker container inspect stafli_centos6_rsyslog_log_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
         else
 		@echo Showing IP addresses of containers for $(DISTRO)...
-		docker container inspect $(DISTRO)_rsyslog_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
+		docker container inspect stafli_$(DISTRO)_rsyslog_log_1 | grep -e "inspect" -e "\"NetworkID\"" -B 0 -A 8;
         endif
 
 
@@ -469,19 +469,19 @@ con-ports:
 	@echo
         ifeq ($(DISTRO), all)
 		@echo Showing ports of containers for debian8...
-		docker container port debian8_rsyslog_1;
+		docker container port stafli_debian8_rsyslog_log_1;
 		@echo
 		@echo Showing ports of containers for debian7...
-		docker container port debian7_rsyslog_1;
+		docker container port stafli_debian7_rsyslog_log_1;
 		@echo
 		@echo Showing ports of containers for centos7...
-		docker container port centos7_rsyslog_1;
+		docker container port stafli_centos7_rsyslog_log_1;
 		@echo
 		@echo Showing ports of containers for centos6...
-		docker container port centos6_rsyslog_1;
+		docker container port stafli_centos6_rsyslog_log_1;
         else
 		@echo Showing ports of containers for $(DISTRO)...
-		docker container port $(DISTRO)_rsyslog_1;
+		docker container port stafli_$(DISTRO)_rsyslog_log_1;
         endif
 
 
@@ -491,19 +491,19 @@ con-top:
 	@echo
         ifeq ($(DISTRO), all)
 		@echo Showing processes of containers for debian8...
-		docker container top debian8_rsyslog_1;
+		docker container top stafli_debian8_rsyslog_log_1;
 		@echo
 		@echo Showing processes of containers for debian7...
-		docker container top debian7_rsyslog_1;
+		docker container top stafli_debian7_rsyslog_log_1;
 		@echo
 		@echo Showing processes of containers for centos7...
-		docker container top centos7_rsyslog_1;
+		docker container top stafli_centos7_rsyslog_log_1;
 		@echo
 		@echo Showing processes of containers for centos6...
-		docker container top centos6_rsyslog_1;
+		docker container top stafli_centos6_rsyslog_log_1;
         else
 		@echo Showing processes of containers for $(DISTRO)...
-		docker container top $(DISTRO)_rsyslog_1;
+		docker container top stafli_$(DISTRO)_rsyslog_log_1;
         endif
 
 
