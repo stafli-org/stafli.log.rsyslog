@@ -1,6 +1,6 @@
 ---
 #
-#    Debian 7 (wheezy) Rsyslog Log Server (docker-compose.override.sample.yml)
+#    Debian 7 (wheezy) Rsyslog58 Log Server (docker-compose.override.sample.yml)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -27,7 +27,7 @@ version: '2'
 #
 services:
 
-  debian7_rsyslog_log:
+  log_rsyslog58_debian7:
     build:
       args:
 

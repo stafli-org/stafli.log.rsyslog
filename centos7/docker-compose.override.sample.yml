@@ -1,6 +1,6 @@
 ---
 #
-#    CentOS 7 (centos7) Rsyslog Log Server (docker-compose.override.sample.yml)
+#    CentOS 7 (centos7) Rsyslog824 Log Server (docker-compose.override.sample.yml)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -27,7 +27,7 @@ version: '2'
 #
 services:
 
-  centos7_rsyslog_log:
+  log_rsyslog824_centos7:
     build:
       args:
 

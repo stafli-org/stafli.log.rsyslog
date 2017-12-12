@@ -1,6 +1,6 @@
 ---
 #
-#    CentOS 7 (centos7) Rsyslog Log Server (docker-compose.yml)
+#    CentOS 7 (centos7) Rsyslog824 Log Server (docker-compose.yml)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -27,7 +27,7 @@ version: '2'
 #
 services:
 
-  centos7_rsyslog_log:
+  log_rsyslog824_centos7:
     labels:
       - "org.label-schema.schema-version=1.0"
       - "org.label-schema.name=$PROJECT_NAME"
@@ -54,7 +54,7 @@ services:
       - "org.label-schema.os-architecture=$BUILD_ARCH"
       - "org.label-schema.version=$BUILD_VERSION"
       - "org.label-schema.build-date=$BUILD_DATE"
-    image: "${IMAGE_URL_PREFIX}:centos7_rsyslog"
+    image: "${IMAGE_URL_PREFIX}:rsyslog824_centos7"
     build:
       context: "./dockerfiles"
       dockerfile: "rsyslog.dockerfile"

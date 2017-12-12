@@ -1,6 +1,6 @@
 
 #
-#    CentOS 7 (centos7) Rsyslog Log Server (dockerfile)
+#    CentOS 7 (centos7) Rsyslog824 Log Server (dockerfile)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-FROM stafli/stafli.base.system:centos7_base
+FROM stafli/stafli.system.base:base10_centos7
 
 #
 # Arguments

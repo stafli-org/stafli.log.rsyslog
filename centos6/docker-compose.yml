@@ -1,6 +1,6 @@
 ---
 #
-#    CentOS 6 (centos6) Rsyslog Log Server (docker-compose.yml)
+#    CentOS 6 (centos6) Rsyslog58 Log Server (docker-compose.yml)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -27,7 +27,7 @@ version: '2'
 #
 services:
 
-  centos6_rsyslog_log:
+  log_rsyslog58_centos6:
     labels:
       - "org.label-schema.schema-version=1.0"
       - "org.label-schema.name=$PROJECT_NAME"
@@ -54,7 +54,7 @@ services:
       - "org.label-schema.os-architecture=$BUILD_ARCH"
       - "org.label-schema.version=$BUILD_VERSION"
       - "org.label-schema.build-date=$BUILD_DATE"
-    image: "${IMAGE_URL_PREFIX}:centos6_rsyslog"
+    image: "${IMAGE_URL_PREFIX}:rsyslog58_centos6"
     build:
       context: "./dockerfiles"
       dockerfile: "rsyslog.dockerfile"

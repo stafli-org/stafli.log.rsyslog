@@ -1,6 +1,6 @@
 
 #
-#    Debian 8 (jessie) Rsyslog Log Server (dockerfile)
+#    Debian 8 (jessie) Rsyslog84 Log Server (dockerfile)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-FROM stafli/stafli.base.system:debian8_base
+FROM stafli/stafli.system.base:base10_debian8
 
 #
 # Arguments

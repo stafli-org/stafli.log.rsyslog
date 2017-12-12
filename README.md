@@ -1,6 +1,6 @@
 # Stafli Rsyslog Log Server
 Stafli Rsyslog Log Server builds based on [Debian](https://www.debian.org) and [CentOS](https://www.centos.org), and developed as scripts for [Docker](https://www.docker.com).  
-Continues on [Stafli Base System](https://github.com/stafli-org/stafli.base.system) builds.  
+Continues on [Stafli Base System](https://github.com/stafli-org/stafli.system.base) builds.  
 This project is part of the [Stafli Application Stack](https://github.com/stafli-org).
 
 Requires [Docker Compose](https://docs.docker.com/compose) 1.6.x or higher due to the [version 2](https://docs.docker.com/compose/compose-file/#versioning) format of the docker-compose.yml files.
@@ -10,7 +10,7 @@ An optional [Makefile](../../tree/master/Makefile) is provided to help with load
 
 Scripts are also provided for each distribution to help test and deploy the installation procedures in non-Docker environments.
 
-The images are automatically built at a [repository](https://hub.docker.com/r/stafli/stafli.rsyslog.log) in the Docker Hub registry.
+The images are automatically built at a [repository](https://hub.docker.com/r/stafli/stafli.log.rsyslog) in the Docker Hub registry.
 
 ## Distributions
 The services use custom images as a starting point for the following distributions:
@@ -23,23 +23,25 @@ The services use custom images as a starting point for the following distributio
 
 ## Services
 These are the services described by the dockerfile and docker-compose files:
-- Rsyslog, built on [Stafli Base System](https://github.com/stafli-org/stafli.base.system) and additional [Rsyslog](http://www.rsyslog.com) packages
+- Rsyslog 5.8.x (debian7 and centos6), built on [Stafli Base System](https://github.com/stafli-org/stafli.system.base) and additional [Rsyslog](http://www.rsyslog.com) packages
+- Rsyslog 8.4.x (debian8), built on [Stafli Base System](https://github.com/stafli-org/stafli.system.base) and additional [Rsyslog](http://www.rsyslog.com) packages
+- Rsyslog 8.24.x (centos7), built on [Stafli Base System](https://github.com/stafli-org/stafli.system.base) and additional [Rsyslog](http://www.rsyslog.com) packages
 
 ## Images
-These are the [resulting images](https://hub.docker.com/r/stafli/stafli.rsyslog.log/tags) upon building:
-- Rsyslog:
-  - stafli/stafli.rsyslog.log:debian8_rsyslog
-  - stafli/stafli.rsyslog.log:debian7_rsyslog
-  - stafli/stafli.rsyslog.log:centos7_rsyslog
-  - stafli/stafli.rsyslog.log:centos6_rsyslog
+These are the [resulting images](https://hub.docker.com/r/stafli/stafli.log.rsyslog/tags) upon building:
+- Rsyslog 5.x.x/8.x.x:
+  - stafli/stafli.log.rsyslog:rsyslog84_debian8
+  - stafli/stafli.log.rsyslog:rsyslog58_debian7
+  - stafli/stafli.log.rsyslog:rsyslog824_centos7
+  - stafli/stafli.log.rsyslog:rsyslog58_centos6
 
 ## Containers
 These containers can be created from the images:
-- Rsyslog:
-  - debian8_rsyslog_xxx
-  - debian7_rsyslog_xxx
-  - centos7_rsyslog_xxx
-  - centos6_rsyslog_xxx
+- Rsyslog 5.x.x/8.x.x:
+  - stafli_log_rsyslog84_debian8_xxx
+  - stafli_log_rsyslog58_debian7_xxx
+  - stafli_log_rsyslog824_centos7_xxx
+  - stafli_log_rsyslog58_centos6_xxx
 
 ## Usage
 
@@ -56,19 +58,19 @@ Where <image_url> is the full image url (lookup the image list above).
 
 Example:
 ```
-docker pull stafli/stafli.rsyslog.log:debian8_rsyslog
+docker pull stafli/stafli.log.rsyslog:rsyslog84_debian8
 
-docker run -ti stafli/stafli.rsyslog.log:debian8_rsyslog /bin/bash
+docker run -ti stafli/stafli.log.rsyslog:rsyslog84_debian8 /bin/bash
 ```
 
 ### From GitHub repository (automated)
 
 Note: this method allows using docker-compose and the Makefile.
 
-1. Download the repository [zip file](https://github.com/stafli-org/stafli.rsyslog.log/archive/master.zip) and unpack it or clone the repository using:  
-`git clone https://github.com/stafli-org/stafli.rsyslog.log.git`
+1. Download the repository [zip file](https://github.com/stafli-org/stafli.log.rsyslog/archive/master.zip) and unpack it or clone the repository using:  
+`git clone https://github.com/stafli-org/stafli.log.rsyslog.git`
 2. Navigate to the project directory through the terminal:  
-`cd stafli.rsyslog.log`
+`cd stafli.log.rsyslog`
 3. Type in the desired operation through the terminal:  
 `make <operation> DISTRO=<distro>`
 
@@ -76,8 +78,8 @@ Where <distro> is the distribution/directory and <operation> is the desired dock
 
 Example:
 ```
-git clone https://github.com/stafli-org/stafli.rsyslog.log.git;
-cd stafli.rsyslog.log;
+git clone https://github.com/stafli-org/stafli.log.rsyslog.git;
+cd stafli.log.rsyslog;
 
 # Example #1: quick start, with build
 make up DISTRO=debian8;
