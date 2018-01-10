@@ -72,12 +72,11 @@ LABEL description="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog, Based o
 
 # Install rsyslog packages
 #  - rsyslog: for rsyslogd, the rocket-fast system for log processing
-#  - logrotate: for logrotate, the log rotation utility
 RUN printf "Installing repositories and packages...\n" && \
     \
     printf "Install the required packages...\n" && \
     apt-get update && apt-get install -qy \
-      rsyslog logrotate && \
+      rsyslog && \
     \
     printf "# Cleanup the Package Manager...\n" && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
