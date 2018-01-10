@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#    Debian 7 (wheezy) Rsyslog58 Log Server (shellscript)
+#    Debian 8 (jessie) Rsyslog84 Log Server (shellscript)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -33,7 +33,7 @@ shopt -s expand_aliases;
 source $(dirname "${BASH_SOURCE[0]}")/../.env;
 
 # Load dockerfile
-source "$(dirname $(readlink -f $0))/../dockerfiles/rsyslog.dockerfile";
+source "$(dirname $(readlink -f $0))/../dockerfiles/${IMAGE_TAG_PREFIX}${DISTRO_DEBIAN8_VERSION}.dockerfile";
 
 #
 # Cleanup
@@ -47,8 +47,8 @@ source "$(dirname $(readlink -f $0))/../dockerfiles/rsyslog.dockerfile";
 #
 
 # Enable daemon
-update-rc.d rsyslog enable;
+systemctl enable rsyslog.service;
 
 # Start daemon
-service rsyslog restart;
+systemctl restart rsyslog.service;
 

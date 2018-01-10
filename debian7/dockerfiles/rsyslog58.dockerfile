@@ -1,6 +1,6 @@
 
 #
-#    Debian 8 (jessie) Rsyslog84 Log Server (dockerfile)
+#    Debian 7 (wheezy) Rsyslog58 Log Server (dockerfile)
 #    Copyright (C) 2016-2017 Stafli
 #    Luís Pedro Algarvio
 #    This file is part of the Stafli Application Stack.
@@ -24,14 +24,14 @@
 #
 
 # Base image to use
-FROM stafli/stafli.system.base:base10_debian8
+FROM stafli/stafli.init.supervisor:supervisor30_debian7
 
 # Labels to apply
-LABEL description="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog, Based on Stafli Base System (stafli/stafli.system.base)" \
+LABEL description="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog), Based on Stafli Supervisor Init (stafli/stafli.init.supervisor)" \
       maintainer="lp@algarvio.org" \
       org.label-schema.schema-version="1.0.0-rc.1" \
-      org.label-schema.name="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog" \
-      org.label-schema.description="Based on Stafli Base System (stafli/stafli.system.base)" \
+      org.label-schema.name="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog)" \
+      org.label-schema.description="Based on Stafli Supervisor Init (stafli/stafli.init.supervisor)" \
       org.label-schema.keywords="stafli, rsyslog, log, debian, centos" \
       org.label-schema.url="https://stafli.org/" \
       org.label-schema.license="GPLv3" \
@@ -46,7 +46,7 @@ LABEL description="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog, Based o
       org.label-schema.vcs-url="https://github.com/stafli-org/stafli.log.rsyslog" \
       org.label-schema.vcs-branch="master" \
       org.label-schema.os-id="debian" \
-      org.label-schema.os-version-id="8" \
+      org.label-schema.os-version-id="7" \
       org.label-schema.os-architecture="amd64" \
       org.label-schema.version="1.0"
 
@@ -103,6 +103,12 @@ command=/bin/bash -c \"supervisorctl start rsyslogd;\"\n\
 autostart=true\n\
 autorestart=false\n\
 startsecs=0\n\
+stdout_logfile=/dev/stdout\n\
+stdout_logfile_maxbytes=0\n\
+stderr_logfile=/dev/stderr\n\
+stderr_logfile_maxbytes=0\n\
+stdout_events_enabled=true\n\
+stderr_events_enabled=true\n\
 \n" > ${file} && \
     printf "Done patching ${file}...\n" && \
     \
@@ -111,9 +117,15 @@ startsecs=0\n\
     printf "\n# Applying configuration for ${file}...\n" && \
     printf "# Rsyslog\n\
 [program:rsyslogd]\n\
-command=/bin/bash -c \"\$(which rsyslogd) -f /etc/rsyslog.conf -n\"\n\
+command=/bin/bash -c \"\$(which rsyslogd) -f /etc/rsyslog.conf -c5 -n\"\n\
 autostart=false\n\
 autorestart=true\n\
+stdout_logfile=/dev/stdout\n\
+stdout_logfile_maxbytes=0\n\
+stderr_logfile=/dev/stderr\n\
+stderr_logfile_maxbytes=0\n\
+stdout_events_enabled=true\n\
+stderr_events_enabled=true\n\
 \n" > ${file} && \
     printf "Done patching ${file}...\n" && \
     \
@@ -148,5 +160,5 @@ autorestart=true\n\
 
 # Command to execute
 # Defaults to /bin/bash.
-#CMD ["/bin/bash"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf", "--nodaemon"]
 
