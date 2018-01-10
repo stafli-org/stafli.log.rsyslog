@@ -19,17 +19,50 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+#
+# Build
+#
+
+# Base image to use
 FROM stafli/stafli.system.base:base10_centos7
+
+# Labels to apply
+LABEL description="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog, Based on Stafli Base System (stafli/stafli.system.base)" \
+      maintainer="lp@algarvio.org" \
+      org.label-schema.schema-version="1.0.0-rc.1" \
+      org.label-schema.name="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog" \
+      org.label-schema.description="Based on Stafli Base System (stafli/stafli.system.base)" \
+      org.label-schema.keywords="stafli, rsyslog, log, debian, centos" \
+      org.label-schema.url="https://stafli.org/" \
+      org.label-schema.license="GPLv3" \
+      org.label-schema.vendor-name="Stafli" \
+      org.label-schema.vendor-email="info@stafli.org" \
+      org.label-schema.vendor-website="https://www.stafli.org" \
+      org.label-schema.authors.lpalgarvio.name="Luis Pedro Algarvio" \
+      org.label-schema.authors.lpalgarvio.email="lp@algarvio.org" \
+      org.label-schema.authors.lpalgarvio.homepage="https://lp.algarvio.org" \
+      org.label-schema.authors.lpalgarvio.role="Maintainer" \
+      org.label-schema.registry-url="https://hub.docker.com/r/stafli/stafli.log.rsyslog" \
+      org.label-schema.vcs-url="https://github.com/stafli-org/stafli.log.rsyslog" \
+      org.label-schema.vcs-branch="master" \
+      org.label-schema.os-id="centos" \
+      org.label-schema.os-version-id="7" \
+      org.label-schema.os-architecture="amd64" \
+      org.label-schema.version="1.0"
 
 #
 # Arguments
 #
 
 #
+# Environment
+#
+
+#
 # Packages
 #
 
-# Install daemon and utilities packages
+# Install rsyslog packages
 #  - rsyslog: for rsyslogd, the rocket-fast system for log processing
 #  - logrotate: for logrotate, the log rotation utility
 RUN printf "Installing repositories and packages...\n" && \
@@ -38,7 +71,7 @@ RUN printf "Installing repositories and packages...\n" && \
     yum makecache && yum install -y \
       rsyslog logrotate && \
     printf "Cleanup the Package Manager...\n" && \
-    yum clean all && rm -Rf /var/lib/yum/*; \
+    yum clean all && rm -Rf /var/lib/yum/* && \
     \
     printf "Finished installing repositories and packages...\n";
 
@@ -49,62 +82,70 @@ RUN printf "Installing repositories and packages...\n" && \
 # Update daemon configuration
 # - Supervisor
 # - Rsyslog
-RUN printf "Updading Daemon configuration...\n"; \
+RUN printf "Updading Daemon configuration...\n" && \
     \
-    printf "Updading Supervisor configuration...\n"; \
+    printf "Updading Supervisor configuration...\n" && \
     \
     # /etc/supervisord.d/init.conf \
-    file="/etc/supervisord.d/init.conf"; \
-    printf "\n# Applying configuration for ${file}...\n"; \
+    file="/etc/supervisord.d/init.conf" && \
+    printf "\n# Applying configuration for ${file}...\n" && \
     printf "# init\n\
 [program:init]\n\
 command=/bin/bash -c \"supervisorctl start rsyslogd;\"\n\
 autostart=true\n\
 autorestart=false\n\
 startsecs=0\n\
-\n" > ${file}; \
-    printf "Done patching ${file}...\n"; \
+\n" > ${file} && \
+    printf "Done patching ${file}...\n" && \
     \
     # /etc/supervisord.d/rsyslogd.conf \
-    file="/etc/supervisord.d/rsyslogd.conf"; \
-    printf "\n# Applying configuration for ${file}...\n"; \
+    file="/etc/supervisord.d/rsyslogd.conf" && \
+    printf "\n# Applying configuration for ${file}...\n" && \
     printf "# Rsyslog\n\
 [program:rsyslogd]\n\
 command=/bin/bash -c \"\$(which rsyslogd) -f /etc/rsyslog.conf -n\"\n\
 autostart=false\n\
 autorestart=true\n\
-\n" > ${file}; \
-    printf "Done patching ${file}...\n"; \
+\n" > ${file} && \
+    printf "Done patching ${file}...\n" && \
     \
-    printf "Updading Rsyslog configuration...\n"; \
+    printf "Updading Rsyslog configuration...\n" && \
     \
     # ignoring /etc/sysconfig/rsyslog \
     \
     # /etc/rsyslog.conf \
-    file="/etc/rsyslog.conf"; \
-    printf "\n# Applying configuration for ${file}...\n"; \
+    file="/etc/rsyslog.conf" && \
+    printf "\n# Applying configuration for ${file}...\n" && \
     # Disable kernel logging \
-    perl -0p -i -e "s>\\$\\ModLoad imklog>#\\$\\ModLoad imklog>" ${file}; \
+    perl -0p -i -e "s>\\$\\ModLoad imklog>#\\$\\ModLoad imklog>" ${file} && \
     # Enable socket input and local logging \
     # http://www.projectatomic.io/blog/2014/09/running-syslog-within-a-docker-container/ \
-    perl -0p -i -e "s>#\\$\\ModLoad imuxsock>\\$\\ModLoad imuxsock>" ${file}; \
-    perl -0p -i -e "s>\\$\\OmitLocalLogging on>\\$\\OmitLocalLogging off>" ${file}; \
+    perl -0p -i -e "s>#\\$\\ModLoad imuxsock>\\$\\ModLoad imuxsock>" ${file} && \
+    perl -0p -i -e "s>\\$\\OmitLocalLogging on>\\$\\OmitLocalLogging off>" ${file} && \
     # Disable systemd (journald) logging \
     # http://www.projectatomic.io/blog/2014/09/running-syslog-within-a-docker-container/ \
-    perl -0p -i -e "s>\\$\\ModLoad imjournal>#\\$\\ModLoad imjournal>" ${file}; \
-    perl -0p -i -e "s>\\$\\IMJournalStateFile>#\\$\\IMJournalStateFile>" ${file}; \
-    printf "Done patching ${file}...\n"; \
+    perl -0p -i -e "s>\\$\\ModLoad imjournal>#\\$\\ModLoad imjournal>" ${file} && \
+    perl -0p -i -e "s>\\$\\IMJournalStateFile>#\\$\\IMJournalStateFile>" ${file} && \
+    printf "Done patching ${file}...\n" && \
     \
     # /etc/rsyslog.d/listen.conf \
-    file="/etc/rsyslog.d/listen.conf"; \
-    printf "\n# Applying configuration for ${file}...\n"; \
+    file="/etc/rsyslog.d/listen.conf" && \
+    printf "\n# Applying configuration for ${file}...\n" && \
     # Disable systemd (journald) logging \
-    perl -0p -i -e "s>\\$\\SystemLogSocketName>#\\$\\SystemLogSocketName>" ${file}; \
-    printf "Done patching ${file}...\n"; \
+    perl -0p -i -e "s>\\$\\SystemLogSocketName>#\\$\\SystemLogSocketName>" ${file} && \
+    printf "Done patching ${file}...\n" && \
     \
-    printf "\n# Testing configuration...\n"; \
-    echo "Testing $(which rsyslogd):"; $(which rsyslogd) -v; \
-    printf "Done testing configuration...\n"; \
+    printf "\n# Testing configuration...\n" && \
+    echo "Testing $(which rsyslogd):" && $(which rsyslogd) -v && \
+    printf "Done testing configuration...\n" && \
     \
     printf "Finished Daemon configuration...\n";
+
+#
+# Run
+#
+
+# Command to execute
+# Defaults to /bin/bash.
+#CMD ["/bin/bash"]
 
