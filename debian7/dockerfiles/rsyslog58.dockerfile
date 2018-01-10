@@ -54,6 +54,8 @@ LABEL description="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog), Based 
 # Arguments
 #
 
+ARG app_rsyslog_listen_port="514"
+
 #
 # Environment
 #
@@ -136,8 +138,15 @@ stderr_events_enabled=true\n\
     # /etc/rsyslog.conf \
     file="/etc/rsyslog.conf" && \
     printf "\n# Applying configuration for ${file}...\n" && \
+    # Enable tcp and udp communication \
+    perl -0p -i -e "s>.*\\$\\ModLoad imtcp>\\$\\ModLoad imtcp>" ${file} && \
+    perl -0p -i -e "s>.*\\$\\InputTCPServerRun .*>\\$\\InputTCPServerRun 514>" ${file} && \
+    perl -0p -i -e "s>.*\\$\\ModLoad imudp>\\$\\ModLoad imudp>" ${file} && \
+    perl -0p -i -e 's>.*UDPServerRun .*>'"\\$"'UDPServerRun 514>' ${file} && \
     # Disable kernel logging \
     perl -0p -i -e "s>\\$\\ModLoad imklog>#\\$\\ModLoad imklog>" ${file} && \
+    # Enable local logging \
+    perl -0p -i -e "s>.*\\$\\ModLoad imuxsock>\\$\\ModLoad imuxsock>" ${file} && \
     # Enable cron logging \
     perl -0p -i -e "s>#cron\.\*>cron.*>" ${file} && \
     # Disable xconsole \
@@ -161,4 +170,8 @@ stderr_events_enabled=true\n\
 # Command to execute
 # Defaults to /bin/bash.
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf", "--nodaemon"]
+
+# Ports to expose
+# Defaults to 514
+EXPOSE ${app_rsyslog_listen_port}
 

@@ -30,4 +30,7 @@ services:
   log_rsyslog58_centos6:
     build:
       args:
+        app_dropbear_listen_port: "10514"
+    ports:
+      - "10514"
 
