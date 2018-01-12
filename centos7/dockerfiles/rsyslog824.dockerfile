@@ -68,10 +68,10 @@ ARG app_rsyslog_listen_port="514"
 #  - rsyslog: for rsyslogd, the rocket-fast system for log processing
 RUN printf "Installing repositories and packages...\n" && \
     \
-    printf "Install the required packages...\n" && \
+    printf "Install the selected packages...\n" && \
     yum makecache && yum install -y \
       rsyslog && \
-    printf "Cleanup the Package Manager...\n" && \
+    printf "Cleanup the package manager...\n" && \
     yum clean all && rm -Rf /var/lib/yum/* && \
     \
     printf "Finished installing repositories and packages...\n";

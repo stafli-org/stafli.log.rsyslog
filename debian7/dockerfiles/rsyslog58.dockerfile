@@ -76,11 +76,11 @@ ARG app_rsyslog_listen_port="514"
 #  - rsyslog: for rsyslogd, the rocket-fast system for log processing
 RUN printf "Installing repositories and packages...\n" && \
     \
-    printf "Install the required packages...\n" && \
+    printf "Install the selected packages...\n" && \
     apt-get update && apt-get install -qy \
       rsyslog && \
     \
-    printf "# Cleanup the Package Manager...\n" && \
+    printf "Cleanup the package manager...\n" && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     \
     printf "Finished installing repositories and packages...\n";
