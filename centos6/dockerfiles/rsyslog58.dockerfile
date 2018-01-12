@@ -24,7 +24,7 @@
 #
 
 # Base image to use
-FROM stafli/stafli.init.supervisor:supervisor21_centos6
+FROM stafli/stafli.init.supervisor:supervisor31_centos6
 
 # Labels to apply
 LABEL description="Stafli Rsyslog Log Server (stafli/stafli.log.rsyslog), Based on Stafli Supervisor Init (stafli/stafli.init.supervisor)" \
@@ -96,13 +96,31 @@ RUN printf "Updading Daemon configuration...\n" && \
     \
     printf "Updading Supervisor configuration...\n" && \
     \
-    # /etc/supervisord.conf \
-    file="/etc/supervisord.conf" && \
+    # /etc/supervisord.d/init.conf \
+    file="/etc/supervisord.d/init.conf" && \
+    printf "\n# Applying configuration for ${file}...\n" && \
+    printf "# init\n\
+[program:init]\n\
+command=/bin/bash -c \"supervisorctl start rsyslogd;\"\n\
+autostart=true\n\
+autorestart=false\n\
+startsecs=0\n\
+stdout_logfile=/dev/stdout\n\
+stdout_logfile_maxbytes=0\n\
+stderr_logfile=/dev/stderr\n\
+stderr_logfile_maxbytes=0\n\
+stdout_events_enabled=true\n\
+stderr_events_enabled=true\n\
+\n" > ${file} && \
+    printf "Done patching ${file}...\n" && \
+    \
+    # /etc/supervisord.d/rsyslogd.conf \
+    file="/etc/supervisord.d/rsyslogd.conf" && \
     printf "\n# Applying configuration for ${file}...\n" && \
     printf "# Rsyslog\n\
 [program:rsyslogd]\n\
-command=/bin/bash -c \"\$(which rsyslogd) -f /etc/rsyslog.conf -c5 -n\"\n\
-autostart=true\n\
+command=/bin/bash -c \"\$(which rsyslogd) -f /etc/rsyslog.conf -n\"\n\
+autostart=false\n\
 autorestart=true\n\
 stdout_logfile=/dev/stdout\n\
 stdout_logfile_maxbytes=0\n\
@@ -110,7 +128,7 @@ stderr_logfile=/dev/stderr\n\
 stderr_logfile_maxbytes=0\n\
 stdout_events_enabled=true\n\
 stderr_events_enabled=true\n\
-\n" >> ${file} && \
+\n" > ${file} && \
     printf "Done patching ${file}...\n" && \
     \
     printf "Updading Rsyslog configuration...\n" && \

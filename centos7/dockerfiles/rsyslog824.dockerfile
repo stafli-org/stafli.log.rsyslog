@@ -60,6 +60,14 @@ ARG app_rsyslog_listen_port="514"
 # Environment
 #
 
+# Working directory to use when executing build and run instructions
+# Defaults to /.
+#WORKDIR /
+
+# User and group to use when executing build and run instructions
+# Defaults to root.
+#USER root:root
+
 #
 # Packages
 #
