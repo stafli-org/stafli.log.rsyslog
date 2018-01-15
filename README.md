@@ -30,10 +30,10 @@ These are the services described by the dockerfile and docker-compose files:
 ## Images
 These are the [resulting images](https://hub.docker.com/r/stafli/stafli.log.rsyslog/tags) upon building:
 - Rsyslog 5.x.x/8.x.x:
-  - stafli/stafli.log.rsyslog:rsyslog84_debian8
-  - stafli/stafli.log.rsyslog:rsyslog58_debian7
-  - stafli/stafli.log.rsyslog:rsyslog824_centos7
-  - stafli/stafli.log.rsyslog:rsyslog58_centos6
+  - stafli/stafli.log.rsyslog:rsyslog84_debian8   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog84_debian8.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog84_debian8 "Get your own image badge on microbadger.com")
+  - stafli/stafli.log.rsyslog:rsyslog58_debian7   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog58_debian7.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog58_debian7 "Get your own image badge on microbadger.com")
+  - stafli/stafli.log.rsyslog:rsyslog824_centos7   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog824_centos7.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog824_centos7 "Get your own image badge on microbadger.com")
+  - stafli/stafli.log.rsyslog:rsyslog58_centos6   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog58_centos6.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog58_centos6 "Get your own image badge on microbadger.com")
 
 ## Containers
 These containers can be created from the images:
