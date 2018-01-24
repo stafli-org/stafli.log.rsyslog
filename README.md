@@ -23,24 +23,26 @@ The services use custom images as a starting point for the following distributio
 
 ## Services
 These are the services described by the dockerfile and docker-compose files:
-- Rsyslog 5.8.x (debian7 and centos6), built on [Stafli Init Supervisor](https://github.com/stafli-org/stafli.init.supervisor) and additional [Rsyslog](http://www.rsyslog.com) packages
 - Rsyslog 8.4.x (debian8), built on [Stafli Init Supervisor](https://github.com/stafli-org/stafli.init.supervisor) and additional [Rsyslog](http://www.rsyslog.com) packages
 - Rsyslog 8.24.x (centos7), built on [Stafli Init Supervisor](https://github.com/stafli-org/stafli.init.supervisor) and additional [Rsyslog](http://www.rsyslog.com) packages
+- Rsyslog 5.8.x (debian7 and centos6), built on [Stafli Init Supervisor](https://github.com/stafli-org/stafli.init.supervisor) and additional [Rsyslog](http://www.rsyslog.com) packages
 
 ## Images
 These are the [resulting images](https://hub.docker.com/r/stafli/stafli.log.rsyslog/tags) upon building:
-- Rsyslog 5.x.x/8.x.x:
+- Stable:
   - stafli/stafli.log.rsyslog:rsyslog84_debian8   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog84_debian8.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog84_debian8 "Get your own image badge on microbadger.com")
-  - stafli/stafli.log.rsyslog:rsyslog58_debian7   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog58_debian7.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog58_debian7 "Get your own image badge on microbadger.com")
   - stafli/stafli.log.rsyslog:rsyslog824_centos7   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog824_centos7.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog824_centos7 "Get your own image badge on microbadger.com")
+- Old Stable:
+  - stafli/stafli.log.rsyslog:rsyslog58_debian7   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog58_debian7.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog58_debian7 "Get your own image badge on microbadger.com")
   - stafli/stafli.log.rsyslog:rsyslog58_centos6   [![](https://images.microbadger.com/badges/image/stafli/stafli.log.rsyslog:rsyslog58_centos6.svg)](https://microbadger.com/images/stafli/stafli.log.rsyslog:rsyslog58_centos6 "Get your own image badge on microbadger.com")
 
 ## Containers
 These containers can be created from the images:
-- Rsyslog 5.x.x/8.x.x:
+- Stable:
   - stafli_log_rsyslog84_debian8_xxx
-  - stafli_log_rsyslog58_debian7_xxx
   - stafli_log_rsyslog824_centos7_xxx
+- Old Stable:
+  - stafli_log_rsyslog58_debian7_xxx
   - stafli_log_rsyslog58_centos6_xxx
 
 ## Usage
